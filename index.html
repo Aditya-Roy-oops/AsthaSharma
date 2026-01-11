@@ -65,6 +65,12 @@
         html {
             scroll-behavior: smooth;
         }
+        
+        /* Prevent Horizontal Overflow */
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
 
         /* Typography Enhancements */
         h1, h2, h3, h4, h5, h6 {
@@ -195,7 +201,6 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-brand-blue flex items-center gap-2 font-serif">
                 <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-white">
-                    <!-- <i class="fas fa-chart-line text-sm"></i> -->
                     <img src="logo.png" alt="Logo" class="w-6 h-6">
                 </div>
                 Astha Sharma
@@ -275,7 +280,7 @@
 
             <!-- Hero Image -->
             <div class="relative z-10 flex justify-center md:justify-end animate-[float_6s_ease-in-out_infinite]">
-                <div class="relative w-[350px] h-[350px] md:w-[450px] md:h-[450px]">
+                <div class="relative w-72 h-72 sm:w-80 sm:h-80 md:w-[450px] md:h-[450px]">
                     <!-- Background Decoration -->
                     <div class="blob-bg"></div> 
                     <div class="absolute inset-0 bg-brand-accent rounded-full opacity-10 blur-3xl transform translate-x-4 translate-y-4"></div>
@@ -676,7 +681,7 @@
     <!-- Creative Footer -->
     <footer class="bg-slate-900 text-white relative pt-24 pb-12">
         <!-- Wave Separator -->
-        <!-- <div class="footer-wave"></div> -->
+        <div class="footer-wave"></div>
 
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
