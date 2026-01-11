@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astha Sharma | Financial Advisor</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#005baa', /* Bajaj Blue vibe */
+                            dark: '#003d73',
+                            accent: '#fdb913', /* Gold/Yellow accent */
+                            light: '#f0f8ff',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        /* Testimonial Slider Styles */
+        .testimonial-container {
+            overflow: hidden;
+            position: relative;
+        }
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .testimonial-card {
+            min-width: 100%;
+            padding: 1rem;
+        }
+
+        /* WhatsApp Floating Button Animation */
+        .whatsapp-float-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: pulse-green 2s infinite;
+        }
+
+        .whatsapp-float-btn:hover {
+            transform: scale(1.1);
+            background-color: #20BA56;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Blob Background for Profile */
+        .blob-bg {
+            position: absolute;
+            z-index: -1;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            background-image: url('bg-header.png'); /* Using uploaded asset */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.15;
+            animation: rotate 60s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Form styling */
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8fafc;
+            transition: all 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #005baa;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(0, 91, 170, 0.1);
+        }
+
+        /* Background Icon Watermark */
+        .watermark {
+            background-image: url('bg-icon.png');
+            background-repeat: repeat;
+            opacity: 0.03;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 antialiased relative">
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float-btn" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-brand-blue flex items-center gap-2">
+                <div class="w-8 h-8 bg-brand-accent rounded-full flex items-center justify-center text-white">
+                    <i class="fas fa-chart-line text-sm"></i>
+                </div>
+                Astha Sharma
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="hover:text-brand-blue transition font-medium">Home</a>
+                <a href="#about" class="hover:text-brand-blue transition font-medium">About</a>
+                <a href="#services" class="hover:text-brand-blue transition font-medium">Services</a>
+                <a href="#testimonials" class="hover:text-brand-blue transition font-medium">Reviews</a>
+                <a href="#contact" class="px-5 py-2.5 bg-brand-blue text-white rounded-full hover:bg-brand-dark transition shadow-lg hover:shadow-brand-blue/30">
+                    Contact Me
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-2xl text-brand-dark" id="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div class="md:hidden hidden bg-white border-t p-4 absolute w-full shadow-lg" id="mobile-menu">
+            <a href="#home" class="block py-2 hover:text-brand-blue">Home</a>
+            <a href="#about" class="block py-2 hover:text-brand-blue">About</a>
+            <a href="#services" class="block py-2 hover:text-brand-blue">Services</a>
+            <a href="#testimonials" class="block py-2 hover:text-brand-blue">Reviews</a>
+            <a href="#contact" class="block py-2 mt-2 text-brand-blue font-bold">Contact Me</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50">
+        <!-- Abstract Bg Watermark -->
+        <div class="absolute inset-0 watermark pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Hero Text -->
+            <div class="z-10 animate-[slide-up_1s_ease-out]">
+                <div class="inline-block px-4 py-1.5 bg-blue-100 text-brand-blue rounded-full text-sm font-semibold mb-6">
+                    Sales Manager & Loan Advisor
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-slate-900">
+                    Smart Financial <br>
+                    Solutions for Your <span class="text-brand-blue relative">
+                        Growth
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-brand-accent opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                            <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
+                        </svg>
+                    </span>
+                </h1>
+                <p class="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+                    With over 3 years of expertise at Bajaj Finance, I help individuals and businesses secure salary-based and flexible loans with ease.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="group px-8 py-4 bg-brand-blue text-white rounded-full font-semibold shadow-xl shadow-brand-blue/30 hover:bg-brand-dark hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                        Get a Free Quote
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#services" class="px-8 py-4 bg-white text-brand-dark border-2 border-slate-200 rounded-full font-semibold hover:border-brand-blue hover:text-brand-blue transition-all flex items-center justify-center">
+                        View Services
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="mt-10 flex items-center gap-6 opacity-80">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-shield-alt text-brand-accent text-xl"></i>
+                        <span class="text-sm font-medium">Secure Process</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-bolt text-brand-accent text-xl"></i>
+                        <span class="text-sm font-medium">Fast Approval</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="relative z-10 flex justify-center md:justify-end animate-[float_6s_ease-in-out_infinite]">
+                <div class="relative w-[350px] h-[350px] md:w-[450px] md:h-[450px]">
+                    <!-- Background Decoration -->
+                    <div class="blob-bg"></div> 
+                    <div class="absolute inset-0 bg-brand-accent rounded-full opacity-10 blur-3xl transform translate-x-4 translate-y-4"></div>
+                    
+                    <!-- Profile Image Container -->
+                    <div class="relative w-full h-full rounded-b-full overflow-hidden border-b-8 border-brand-blue shadow-2xl bg-gradient-to-b from-transparent to-blue-100/50">
+                        <img src="profile.png" alt="Astha Sharma" class="w-full h-full object-cover object-top mask-image">
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="absolute top-10 -left-6 bg-white p-4 rounded-xl shadow-lg border-l-4 border-brand-accent animate-bounce">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500">Loans Disbursed</p>
+                                <p class="font-bold text-slate-800">500+ Approved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-10 bg-brand-blue text-white relative overflow-hidden">
+        <img src="bg-icon.png" class="absolute top-0 right-0 w-64 opacity-10 rotate-12" alt="bg">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-blue-400/30">
+                <div class="stat-item p-4">
+                    <div class="text-4xl font-bold mb-2 text-brand-accent counter" data-target="3">0</div>
+                    <p class="text-sm opacity-90">Years Experience</p>
+                </div>
+                <!-- Fixed Overlapping + sign using Flexbox -->
+                <div class="stat-item p-4">
+                    <div class="flex justify-center items-baseline gap-1 mb-2">
+                        <div class="text-4xl font-bold text-brand-accent counter" data-target="500">0</div>
+                        <span class="text-3xl font-bold text-brand-accent">+</span>
+                    </div>
+                    <p class="text-sm opacity-90">Loans Disbursed</p>
+                </div>
+                <!-- Fixed Overlapping + sign using Flexbox -->
+                <div class="stat-item p-4">
+                    <div class="flex justify-center items-baseline gap-1 mb-2">
+                        <div class="text-4xl font-bold text-brand-accent counter" data-target="800">0</div>
+                        <span class="text-3xl font-bold text-brand-accent">+</span>
+                    </div>
+                    <p class="text-sm opacity-90">Consultations</p>
+                </div>
+                <div class="stat-item p-4">
+                    <div class="text-4xl font-bold mb-2 text-brand-accent">100%</div>
+                    <p class="text-sm opacity-90">Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-brand-blue font-semibold tracking-wider uppercase text-sm">What I Offer</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Tailored Financial Solutions</h2>
+                <div class="w-20 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 group-hover:bg-brand-blue/10"></div>
+                    <div class="w-14 h-14 bg-brand-light text-brand-blue rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">Salary Based Loans</h3>
+                    <p class="text-slate-600 mb-4">Quick and hassle-free personal loans designed specifically for salaried professionals with competitive interest rates.</p>
+                    <a href="#contact" class="text-brand-blue font-medium hover:underline inline-flex items-center gap-1">Inquire Now <i class="fas fa-chevron-right text-xs"></i></a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 group-hover:bg-brand-accent/10"></div>
+                    <div class="w-14 h-14 bg-yellow-50 text-brand-accent rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-accent group-hover:text-white transition-colors">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">Flexible Loans</h3>
+                    <p class="text-slate-600 mb-4">Customized loan structures that adapt to your repayment capacity, offering you the financial freedom you need.</p>
+                    <a href="#contact" class="text-brand-blue font-medium hover:underline inline-flex items-center gap-1">Inquire Now <i class="fas fa-chevron-right text-xs"></i></a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group p-8 rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 group-hover:bg-brand-blue/10"></div>
+                    <div class="w-14 h-14 bg-brand-light text-brand-blue rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                        <i class="fas fa-comments-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">Financial Consulting</h3>
+                    <p class="text-slate-600 mb-4">Expert advice on managing your debts, optimizing your credit score, and choosing the right financial products.</p>
+                    <a href="#contact" class="text-brand-blue font-medium hover:underline inline-flex items-center gap-1">Inquire Now <i class="fas fa-chevron-right text-xs"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section (Slider) -->
+    <section id="testimonials" class="py-20 bg-slate-50 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-brand-blue font-semibold uppercase text-sm">Testimonials</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">What Clients Say</h2>
+            </div>
+
+            <div class="max-w-4xl mx-auto relative">
+                <!-- Navigation Buttons -->
+                <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 bg-white shadow-lg rounded-full text-brand-blue hover:bg-brand-blue hover:text-white transition flex items-center justify-center">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-10 h-10 bg-white shadow-lg rounded-full text-brand-blue hover:bg-brand-blue hover:text-white transition flex items-center justify-center">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Slider Container -->
+                <div class="testimonial-container">
+                    <div class="testimonial-track" id="track">
+                        <!-- Review 1 -->
+                        <div class="testimonial-card">
+                            <div class="bg-white p-8 rounded-2xl shadow-sm text-center border-t-4 border-brand-accent">
+                                <div class="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
+                                </div>
+                                <div class="text-yellow-400 mb-4 text-sm">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-slate-600 italic mb-6">"Astha Ma'am helped me get a loan when others rejected my application. Her process was transparent and very fast. Highly recommended for Bajaj Finance services."</p>
+                                <h4 class="font-bold text-slate-900">Rajesh Kumar</h4>
+                                <span class="text-xs text-slate-400">Business Owner</span>
+                            </div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="testimonial-card">
+                            <div class="bg-white p-8 rounded-2xl shadow-sm text-center border-t-4 border-brand-accent">
+                                <div class="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="User">
+                                </div>
+                                <div class="text-yellow-400 mb-4 text-sm">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-slate-600 italic mb-6">"Professional and very polite. She explained the flexible loan terms clearly. I got my salary-based loan disbursed within 24 hours."</p>
+                                <h4 class="font-bold text-slate-900">Priya Singh</h4>
+                                <span class="text-xs text-slate-400">Software Engineer</span>
+                            </div>
+                        </div>
+
+                         <!-- Review 3 -->
+                        <div class="testimonial-card">
+                            <div class="bg-white p-8 rounded-2xl shadow-sm text-center border-t-4 border-brand-accent">
+                                <div class="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="User">
+                                </div>
+                                <div class="text-yellow-400 mb-4 text-sm">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-slate-600 italic mb-6">"Great consultation experience. 800+ consultings shows in her confidence. She guided me to the right product for my needs."</p>
+                                <h4 class="font-bold text-slate-900">Amit Verma</h4>
+                                <span class="text-xs text-slate-400">Govt. Employee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative bg-brand-dark">
+        <!-- Abstract Decoration -->
+        <div class="absolute inset-0 bg-brand-blue/20"></div>
+        <img src="bg-header.png" class="absolute bottom-0 left-0 w-full h-full opacity-5 object-cover" alt="bg">
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Contact Info -->
+                <div class="text-white">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Let's Discuss Your Financial Goals</h2>
+                    <p class="text-blue-100 mb-8 text-lg">Reach out for a free consultation. I am available for calls and WhatsApp support.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-brand-accent text-xl shrink-0">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Phone</h4>
+                                <p class="text-blue-200">+91 98765 43210</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-brand-accent text-xl shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Email</h4>
+                                <p class="text-blue-200">astha.sharma@bajajfinance.in</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-brand-accent text-xl shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Location</h4>
+                                <p class="text-blue-200">Bajaj Finance Ltd, Jaipur, Rajasthan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form with Dual Action -->
+                <div class="glass-card p-8 rounded-2xl bg-white">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6">Send a Message</h3>
+                    <!-- Form tag ID used by JS -->
+                    <form id="contactForm">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                                <input type="text" name="name" id="userName" class="form-input" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+                                <input type="tel" name="phone" id="userPhone" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                            <input type="email" name="email" id="userEmail" class="form-input" placeholder="john@example.com" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Loan Type</label>
+                            <select name="loan_type" id="loanType" class="form-input text-slate-600">
+                                <option>Salary Based Loan</option>
+                                <option>Flexible Loan</option>
+                                <option>Business Loan</option>
+                                <option>Consultation Only</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Message</label>
+                            <textarea name="message" id="userMessage" rows="3" class="form-input" placeholder="How can I help you?"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                            <!-- Send Email Button -->
+                            <button type="button" id="btnEmail" class="w-full py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-dark transition shadow-lg flex justify-center items-center gap-2">
+                                <i class="fas fa-envelope"></i>
+                                <span>Send Email</span>
+                            </button>
+                            
+                            <!-- WhatsApp Button -->
+                            <button type="button" id="btnWhatsapp" class="w-full py-3 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#1da851] transition shadow-lg flex justify-center items-center gap-2">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </button>
+                        </div>
+                    </form>
+                    <div id="formStatus" class="mt-4 text-center hidden p-3 rounded-lg text-sm"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <div class="w-6 h-6 bg-brand-accent rounded-full flex items-center justify-center text-white text-xs">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span class="text-white font-bold text-lg">Astha Sharma</span>
+            </div>
+            <p class="mb-4 text-sm">&copy; 2024 Astha Sharma. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-white transition"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Mobile Menu Toggle ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 2. Stats Counter Animation ---
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        let counted = false;
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !counted) {
+                animateCounters();
+                counted = true;
+            }
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.stat-item'));
+
+
+        // --- 3. Testimonial Slider ---
+        const track = document.getElementById('track');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const cards = document.querySelectorAll('.testimonial-card');
+        let currentIndex = 0;
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            updateSlider();
+        });
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateSlider();
+        }, 5000);
+
+
+        // --- 4. Dual Contact Form Handling ---
+        
+        const form = document.getElementById('contactForm');
+        const btnEmail = document.getElementById('btnEmail');
+        const btnWhatsapp = document.getElementById('btnWhatsapp');
+        const statusDiv = document.getElementById('formStatus');
+
+        // Helper: Check validity
+        function validateForm() {
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+            return true;
+        }
+
+        // Action A: Send via WhatsApp
+        btnWhatsapp.addEventListener('click', () => {
+            if (!validateForm()) return;
+
+            const name = document.getElementById('userName').value;
+            const phone = document.getElementById('userPhone').value;
+            const type = document.getElementById('loanType').value;
+            const message = document.getElementById('userMessage').value;
+            const email = document.getElementById('userEmail').value;
+
+            // Construct the WhatsApp Message
+            const whatsappText = `Hello Astha, I am *${name}*.\nI am interested in: *${type}*.\nMy Phone: ${phone}\nEmail: ${email}\n\nMessage: ${message}`;
+            
+            // Encode for URL
+            const encodedText = encodeURIComponent(whatsappText);
+            const whatsappNumber = "919876543210"; // Replace with actual number
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
+        });
+
+        // Action B: Send via Email (Formspree)
+        btnEmail.addEventListener('click', async () => {
+            if (!validateForm()) return;
+
+            // --- IMPORTANT: Replace 'YOUR_FORMSPREE_ID' with your actual Formspree ID ---
+            // 1. Go to https://formspree.io/
+            // 2. Create a form
+            // 3. Copy the code (e.g., 'mqkgwbrj')
+            const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORMSPREE_ID"; 
+
+            // Visual Feedback
+            const originalContent = btnEmail.innerHTML;
+            btnEmail.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btnEmail.disabled = true;
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    statusDiv.classList.remove('hidden');
+                    statusDiv.className = "mt-4 text-center p-3 rounded-lg text-sm bg-green-100 text-green-700";
+                    statusDiv.innerHTML = '<i class="fas fa-check-circle"></i> Email sent successfully! I will contact you shortly.';
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    if (Object.hasOwn(data, 'errors')) {
+                        throw new Error(data["errors"].map(error => error["message"]).join(", "));
+                    } else {
+                        throw new Error("Oops! There was a problem submitting your form");
+                    }
+                }
+            } catch (error) {
+                // If it fails (likely due to missing Formspree ID in demo), show generic success simulation for demo purposes
+                // OR show actual error if configured.
+                
+                if (FORMSPREE_ENDPOINT.includes("YOUR_FORMSPREE_ID")) {
+                     // DEMO MODE: Simulate success since user hasn't put ID yet
+                    console.warn("Formspree ID not set. Simulating success.");
+                    statusDiv.classList.remove('hidden');
+                    statusDiv.className = "mt-4 text-center p-3 rounded-lg text-sm bg-yellow-100 text-yellow-700";
+                    statusDiv.innerHTML = '<b>Note:</b> Email sent! (Demo mode: Please configure Formspree ID in code)';
+                } else {
+                    statusDiv.classList.remove('hidden');
+                    statusDiv.className = "mt-4 text-center p-3 rounded-lg text-sm bg-red-100 text-red-700";
+                    statusDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${error.message}`;
+                }
+            } finally {
+                btnEmail.innerHTML = originalContent;
+                btnEmail.disabled = false;
+                setTimeout(() => { statusDiv.classList.add('hidden'); }, 5000);
+            }
+        });
+
+    </script>
+</body>
+</html>
